@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Sitio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url(foto.JPG);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background-color: rgba(0, 0, 0, 0.4); /* opcional: mejora la visibilidad */
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .welcome-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            padding: 20px;
+        }
+
+        .welcome-section h1 {
+            color: white;
+            font-size: 5em;
+            margin: 0;
+            text-align: center;
+        }
+
+        .login-section {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 40px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            padding-right: 40px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .toggle-password:hover {
+            color: #000;
+        }
+
+        button {
+            background-color: #b57700;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #016a53;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .welcome-section, .login-section {
+                flex: none;
+                width: 100%;
+            }
+
+            .welcome-section h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="welcome-section">
+        <h1>¡Bienvenido a KOTOWA!</h1>
+    </div>
+
+    <div class="login-section">
+        <div class="login-container">
+            <h2>Inicia sesión</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Usuario" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <span class="toggle-password" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <button type="submit">Acceder</button>
+                <p id="error-message"></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('error-message');
+
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        }
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const validCredentials = [
+                { username: 'Rvega', password: 'cafecortado' }, { username: 'Ygarcia', password: 'Espresso2' }, { username: 'Inavarro', password: 'ColdBrew25' },
+		{ username: 'Jfernandes', password: 'Typica25' },{ username: 'Hreal', password: 'Mocha25' },{ username: 'Gdegracia', password: 'Cappuccino44' },{ username: 'Smedina', password: 'cafecubano' },
+		{ username: 'Mgarrido', password: 'TuesteClaro25' },{ username: 'Mhernandez', password: 'FiltroV60' },{ username: 'Mmorales', password: 'Americano78' },{ username: 'Gpinto', password: 'CafeLigero00' },
+		{ username: 'Jphererra', password: 'GranoPremium' },{ username: 'Lherrera', password: 'FrappeTime' },{ username: 'Yjustavino', password: 'Shotespresso' },{ username: 'Lvillareal', password: 'Artelatte' },
+		{ username: 'Jpuga', password: 'GranoTostado' },{ username: 'Cbarrios', password: 'CafeinaPura' },{ username: 'Mbartuano', password: 'CafeínaPura' },{ username: 'Csalina', password: 'MolidoMedio' },
+		{ username: 'Adegracia', password: 'Macchiato' },{ username: 'Dagrazal', password: 'MolidoMedio' },{ username: 'Abarria', password: 'Infusión' },{ username: 'jtarazona', password: 'FiltroV6025' },
+		{ username: 'Avaldes', password: 'TuesteOscuro25' },{ username: 'Ymosquera', password: 'TazaSuave' },{ username: 'Dstevens', password: 'EspressoDoble' },{ username: 'Slopez', password: 'MoliendaFina' },
+		{ username: 'Crodriguez', password: 'AromaCafe' },{ username: 'Hbatista', password: 'Frappe90' },{ username: 'Opeñaloza', password: 'ColdBrew33' },{ username: 'Erangel', password: 'Arabica14@' },
+		{ username: 'Ybonilla', password: 'SaborNatural06' },{ username: 'Jegia', password: 'TuesteNatural18' },{ username: 'Dcastillo', password: 'SaborIntenso39' },{ username: 'Drodriguez', password: 'Robusta67' },{ username: 'Tatencio', password: 'CafePuro' },
+		{ username: 'Atrejos', password: 'VainillaLatte83' },{ username: 'Fnieto', password: 'BaristaPro49@' },{ username: 'Dpereira', password: 'ShotEspresso' },{ username: 'Mcastillo', password: 'VainillaLatte' },
+		{ username: 'Cmadrid', password: 'LatteArt21' },{ username: 'Msanjur', password: 'FiltroV6025' },{ username: 'Rrodriguez', password: 'TuesteClaro' },{ username: 'Kvillareal', password: 'TostadoAlPunto' },
+		{ username: 'Csanchez', password: 'EnergiaLiquida' },{ username: 'Scarreño', password: 'GranoFino' },{ username: 'Vrodriguez', password: 'GranoPremium' },{ username: 'Aarosemena', password: 'CafeCubano' },
+ 		{ username: 'Asaldaña', password: 'MokaLatte09' },{ username: 'Druiz', password: 'Organico26' },{ username: 'Ssanchez', password: 'TazaLlena' },{ username: 'Azapata', password: 'GranoFino' },{ username: 'Mguillen', password: 'Cosecha25' },
+ 		{ username: 'Dhurley', password: 'TuesteMedio' },{ username: 'Farmuelles', password: 'ColdBrew' },{ username: 'Ycredidio', password: 'TuesteClaro' },{ username: 'Vvalentin', password: 'MolinoCafe' },
+		{ username: 'Abethancourth', password: 'TuesteOscuro' },{ username: 'Jgonzalez', password: 'AromaPuro' },
+            ];
+
+
+            const isAuthenticated = validCredentials.some(cred =>
+                cred.username === username && cred.password === password
+            );
+
+            if (isAuthenticated) {
+                errorMessage.textContent = '';
+                window.location.href = 'https://sites.google.com/view/procesosktw-com/inicio';
+            } else {
+                errorMessage.textContent = 'Error: Usuario o contraseña incorrectos.';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
